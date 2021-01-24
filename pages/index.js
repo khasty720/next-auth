@@ -1,5 +1,6 @@
-import Nav from '../components/nav'
-import Footer from '../components/footer'
+import React from 'react';
+import Nav from '../components/layout/nav';
+import Footer from '../components/layout/footer';
 
 const NextAuth = () => (
   <>
@@ -8,7 +9,7 @@ const NextAuth = () => (
       <h1>NextAuth.js Demo</h1>
       <p>
         This is an example project that uses{' '}
-        <a href={`https://www.npmjs.com/package/next-auth`}>next-auth</a>.
+        <a href="https://www.npmjs.com/package/next-auth">next-auth</a>.
       </p>
       <p>
         See <a href="https://next-auth.js.org">next-auth.js.org</a> for more
@@ -25,6 +26,6 @@ const NextAuth = () => (
     </main>
     <Footer />
   </>
-)
+);
 
-export default NextAuth
+export default NextAuth;
