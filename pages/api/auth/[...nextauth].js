@@ -1,5 +1,5 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import NextAuth from 'next-auth';
+import Providers from 'next-auth/providers';
 
 const options = {
   // @link https://next-auth.js.org/configuration/providers
@@ -54,9 +54,7 @@ const options = {
      * @return {boolean}         Return `true` (or a modified JWT) to allow sign in
      *                           Return `false` to deny access
      */
-    signIn: async (user, account, profile) => {
-      return true
-    },
+    signIn: async (user, account, profile) => Promise.resolve(true),
 
     /**
      * @link https://next-auth.js.org/configuration/callbacks#session-callback
@@ -65,10 +63,9 @@ const options = {
      *                               JSON Web Token (if not using database sessions)
      * @return {object}              Session that will be returned to the client
      */
-    session: async (session, user) => {
-      //session.customSessionProperty = 'bar'
-      return Promise.resolve(session)
-    },
+    session: async (session, user) =>
+      // session.customSessionProperty = 'bar'
+      Promise.resolve(session),
 
     /**
      * @link https://next-auth.js.org/configuration/callbacks#jwt-callback
@@ -79,30 +76,31 @@ const options = {
      * @param  {boolean} isNewUser True if new user (only available on sign in)
      * @return {object}            JSON Web Token that will be saved
      */
-    jwt: async (token, user, account, profile, isNewUser) => {
-      //const isSignIn = (user) ? true : false
+    jwt: async (token, user, account, profile, isNewUser) =>
+      // const isSignIn = (user) ? true : false
       // Add auth_time to token on signin in
-      //if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
-      return Promise.resolve(token)
-    },
+      // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
+      Promise.resolve(token),
+
+    redirect: async (url, baseUrl) => Promise.resolve(baseUrl),
   },
 
   // You can define custom pages to override the built-in pages
   // The routes shown here are the default URLs that will be used.
   // @link https://next-auth.js.org/configuration/pages
   pages: {
-    //signIn: '/api/auth/signin',
-    //signOut: '/api/auth/signout',
-    //error: '/api/auth/error', // Error code passed in query string as ?error=
-    //verifyRequest: '/api/auth/verify-request', // (used for check email message)
-    //newUser: null // If set, new users will be directed here on first sign in
+    signIn: '/auth/login',
+    // signOut: '/api/auth/signout',
+    // error: '/api/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/api/auth/verify-request', // (used for check email message)
+    // newUser: null // If set, new users will be directed here on first sign in
   },
 
   // Additional options
   // secret: 'abcdef123456789' // Recommended (but auto-generated if not specified)
   // debug: true, // Use this option to enable debug messages in the console
-}
+};
 
-const Auth = (req, res) => NextAuth(req, res, options)
+const Auth = (req, res) => NextAuth(req, res, options);
 
-export default Auth
+export default Auth;
