@@ -1,14 +1,18 @@
 import React from 'react';
 import { Provider } from 'next-auth/client';
 import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify';
 import '../styles/index.scss';
 
 const App = ({ Component, pageProps }) => {
   const { session } = pageProps;
   return (
-    <Provider session={session}>
-      <Component {...pageProps} />
-    </Provider>
+    <div className="app">
+      <Provider session={session}>
+        <Component {...pageProps} />
+        <ToastContainer hideProgressBar />
+      </Provider>
+    </div>
   );
 };
 

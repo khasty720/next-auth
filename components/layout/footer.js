@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from './footer.module.css';
 
 const Footer = () => (
@@ -10,6 +11,9 @@ const Footer = () => (
       </li>
       <li className={styles.navigationItem}>
         <a href="https://next-auth.js.org">Documentation</a>
+      </li>
+      <li className={styles.navigationItem}>
+        <Link href="/profile">Profile</Link>
       </li>
     </ul>
   </div>
